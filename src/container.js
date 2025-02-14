@@ -3,9 +3,33 @@ import { TodoRepository } from "./repositories/todoRepository.js";
 import { TodoService } from "./services/todoService.js";
 import { TodoController } from "./controllers/todoController.js";
 
-const prisma = new PrismaClient();
-const todoRepository = new TodoRepository(prisma);
-const todoService = new TodoService(todoRepository);
-const todoController = new TodoController(todoService);
+import { UserRepository } from "./repositories/userRepository.js";
+import { AuthService } from "./services/authService.js";
+import { AuthController } from "./controllers/authController.js";
 
-export { prisma, todoRepository, todoService, todoController };
+const prisma = new PrismaClient();
+
+// Repos
+const todoRepository = new TodoRepository(prisma);
+const userRepository = new UserRepository(prisma);
+
+// Services
+const todoService = new TodoService(todoRepository);
+const authService = new AuthService(userRepository);
+
+// Controllers
+const todoController = new TodoController(todoService);
+const authController = new AuthController(authService);
+
+export {
+    prisma,
+    // repositories
+    todoRepository,
+    userRepository,
+    // services
+    todoService,
+    authService,
+    // controllers
+    todoController,
+    authController,
+};
