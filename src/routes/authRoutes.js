@@ -10,15 +10,12 @@ import {
 
 const router = Router();
 
-// Register user
+router.post("/login", validateRequest(loginSchema), authController.login);
 router.post(
     "/register",
     validateRequest(registerSchema),
     authController.register
 );
-// Login user -> dapatkan access & refresh token
-router.post("/login", validateRequest(loginSchema), authController.login);
-// Refresh token
 router.post(
     "/refresh",
     validateRequest(refreshTokenSchema),

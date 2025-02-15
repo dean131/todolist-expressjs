@@ -3,30 +3,33 @@ export class TodoRepository {
         this.prisma = prismaClient;
     }
 
-    async createTodo(data) {
+    createTodo = async (data) => {
+        console.log(data);
         return this.prisma.todo.create({ data });
-    }
+    };
 
-    async getAllTodos() {
-        return this.prisma.todo.findMany();
-    }
+    getAllTodosByUser = async (userId) => {
+        return this.prisma.todo.findMany({
+            where: { userId },
+        });
+    };
 
-    async getTodoById(id) {
+    getTodoById = async (id) => {
         return this.prisma.todo.findUnique({
             where: { id: Number(id) },
         });
-    }
+    };
 
-    async updateTodo(id, data) {
+    updateTodo = async (id, data) => {
         return this.prisma.todo.update({
             where: { id: Number(id) },
             data,
         });
-    }
+    };
 
-    async deleteTodo(id) {
+    deleteTodo = async (id) => {
         return this.prisma.todo.delete({
             where: { id: Number(id) },
         });
-    }
+    };
 }

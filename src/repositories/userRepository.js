@@ -3,15 +3,15 @@ export class UserRepository {
         this.prisma = prisma;
     }
 
-    async createUser(data) {
+    createUser = async (data) => {
         return this.prisma.user.create({ data });
-    }
+    };
 
-    async findUserByUsername(username) {
+    findUserByUsername = async (username) => {
         return this.prisma.user.findUnique({ where: { username } });
-    }
+    };
 
-    async findUserById(id) {
+    findUserById = async (id) => {
         return this.prisma.user.findUnique({ where: { id } });
-    }
+    };
 }

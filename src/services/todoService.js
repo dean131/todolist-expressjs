@@ -5,37 +5,35 @@ export class TodoService {
         this.todoRepository = todoRepository;
     }
 
-    async createTodo(data) {
-        // Contoh validasi: title tidak boleh kosong
-        if (!data.title || data.title.trim() === "") {
-            throw new AppError("Title is required", 400);
-        }
-        // Lanjut buat di DB
+    createTodo = async (data) => {
         return this.todoRepository.createTodo(data);
-    }
+    };
 
-    async getAllTodos() {
-        return this.todoRepository.getAllTodos();
-    }
+    getAllTodosByUser = async (userId) => {
+        return this.todoRepository.getAllTodosByUser(userId);
+    };
 
-    async getTodoById(id) {
+    getTodoById = async (id) => {
         const todo = await this.todoRepository.getTodoById(id);
         if (!todo) {
-            // Throw manual error
             throw new AppError("Todo not found", 404);
         }
         return todo;
-    }
+    };
 
-    async updateTodo(id, data) {
-        // Contoh: jika user tidak isi data, throw error 400
-        if (!data.title && data.completed === undefined) {
-            throw new AppError("No data provided to update", 400);
+    updateTodo = async (id, data) => {
+        const todo = await this.todoRepository.getTodoById(id);
+        if (!todo) {
+            throw new AppError("Todo not found", 404);
         }
         return this.todoRepository.updateTodo(id, data);
-    }
+    };
 
-    async deleteTodo(id) {
+    deleteTodo = async (id) => {
+        const todo = await this.todoRepository.getTodoById(id);
+        if (!todo) {
+            throw new AppError("Todo not found", 404);
+        }
         return this.todoRepository.deleteTodo(id);
-    }
+    };
 }

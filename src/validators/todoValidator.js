@@ -1,6 +1,5 @@
 import Joi from "joi";
 
-// Schema untuk validasi create Todo
 export const createTodoSchema = Joi.object({
     title: Joi.string().min(1).required().messages({
         "string.base": "Title must be a string",
@@ -9,7 +8,6 @@ export const createTodoSchema = Joi.object({
     }),
 });
 
-// Schema untuk validasi update Todo
 export const updateTodoSchema = Joi.object({
     title: Joi.string().min(1).optional().messages({
         "string.base": "Title must be a string",

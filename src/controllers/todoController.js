@@ -6,7 +6,13 @@ export class TodoController {
     createTodo = async (req, res, next) => {
         try {
             const { title } = req.body;
-            const newTodo = await this.todoService.createTodo({ title });
+            const userId = req.user.id;
+
+            const newTodo = await this.todoService.createTodo({
+                title,
+                userId,
+            });
+
             return res.status(201).json({
                 message: "Todo created successfully",
                 data: newTodo,
@@ -18,7 +24,8 @@ export class TodoController {
 
     getAllTodos = async (req, res, next) => {
         try {
-            const todos = await this.todoService.getAllTodos();
+            const userId = req.user.id;
+            const todos = await this.todoService.getAllTodosByUser(userId);
             return res.status(200).json({
                 message: "Success",
                 data: todos,

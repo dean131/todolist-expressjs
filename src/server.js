@@ -6,10 +6,10 @@ import { errorHandler } from "./middlewares/errorHandler.js";
 const app = express();
 app.use(express.json());
 
-// Route Auth (Register, Login, Refresh Token)
+// Route Auth
 app.use("/auth", authRoutes);
 
-// Route Todo (dilindungi authMiddleware di dalam file)
+// Route Todo
 app.use("/todos", todoRoutes);
 
 // Global Error Handler
