@@ -1,7 +1,6 @@
 import { AppError } from "../utils/appError.js";
 
 export const errorHandler = async (err, req, res, next) => {
-    console.error(err);
     let statusCode = 500;
     let message = "Internal Server Error";
 
