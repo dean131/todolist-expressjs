@@ -14,7 +14,7 @@ services:
     depends_on:
       - db_todo
     networks:
-      - npm_network
+      - npm_networks
 
   db_todo:
     image: postgres:13-alpine
@@ -26,11 +26,11 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - npm_network
+      - npm_networks
 
 volumes:
   postgres_data:
 
 networks:
-  npm_network:
+  npm_networks:
     external: true
