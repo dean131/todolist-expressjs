@@ -14,7 +14,6 @@ services:
     networks:
       - npm_networks
 
-
   db_todo:
     image: postgres:13-alpine
     container_name: db_todo
