@@ -2,7 +2,7 @@ name: Deploy to VPS
 
 on:
     push:
-        branches: [main] # Adjust if you use a different branch
+        branches: [main]
 
 jobs:
     deploy:
@@ -11,10 +11,6 @@ jobs:
         steps:
             - name: Checkout Code
               uses: actions/checkout@v3
-
-            # Optional: Build Docker images locally if needed
-            # - name: Build Docker Compose Images
-            #   run: docker-compose build
 
             - name: Deploy with Docker Compose via SSH
               uses: appleboy/ssh-action@v0.1.10
