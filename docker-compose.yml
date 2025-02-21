@@ -7,8 +7,6 @@ services:
     restart: always
     command: >
       sh -c "npx prisma db push && npm run start"
-    ports:
-      - "3000:3000"
     env_file:
       - .env
     depends_on:
