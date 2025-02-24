@@ -1,0 +1,20 @@
+stages:
+    - deploy
+
+deploy_to_vps:
+    stage: deploy
+    image: alpine:latest
+    before_script:
+        # Install openssh-client dan docker-compose
+        - apk add --no-cache openssh-client git docker-compose
+        # Buat direktori untuk SSH dan pasang private key
+        - mkdir -p ~/.ssh
+        - echo "$VPS_SSH_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+        - chmod 600 ~/.ssh/id_rsa
+        # Tambahkan VPS ke known_hosts untuk menghindari interaksi manual
+        - ssh-keyscan -p $VPS_PORT -H $VPS_HOST >> ~/.ssh/known_hosts
+    script:
+        # Masuk ke direktori aplikasi di VPS dan jalankan perintah deploy
+        - ssh -p $VPS_PORT $VPS_USER@$VPS_HOST "cd $APP_DIR && git pull origin main && docker compose up -d --build"
+    only:
+        - main
