@@ -1,5 +1,5 @@
 # Use Node.js LTS (Long Term Support) image as base
-FROM node:20-alpine
+FROM node:20
 
 # Set working directory
 WORKDIR /app
@@ -7,8 +7,7 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies dan rebuild bcrypt
-RUN apk add --no-cache python3 make g++
+# Install dependencies and rebuild bcrypt
 RUN npm install
 RUN npm rebuild bcrypt --build-from-source
 
@@ -22,7 +21,8 @@ RUN npx prisma generate
 COPY . .
 
 # Expose port
+
 EXPOSE 3000
 
-# Jalankan Aplikasi
+# Start the application
 CMD ["npm", "run", "start"]

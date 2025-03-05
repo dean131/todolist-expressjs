@@ -13,7 +13,7 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies and rebuild bcrypt
+# Install dependencies dan rebuild bcrypt
 RUN npm install
 RUN npm rebuild bcrypt --build-from-source
 
@@ -26,7 +26,7 @@ RUN npx prisma generate
 # Salin seluruh kode aplikasi
 COPY . .
 
-# Buka port yang digunakan aplikasi (misal 3000)
+# Expose port
 EXPOSE 3000
 
 # Jalankan aplikasi

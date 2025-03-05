@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: app_todo
     container_name: app_todo
     restart: always
     command: >
@@ -14,35 +15,53 @@ services:
     networks:
       - npm_networks
 
-  # app_todo_alpine:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.alpine
-  #   container_name: app_todo_alpine
-  #   restart: always
-  #   command: >
-  #     sh -c "npx prisma db push && npm run start"
-  #   env_file:
-  #     - .env
-  #   depends_on:
-  #     - db_todo
-  #   networks:
-  #     - npm_networks
+  app_todo_debian:
+    build:
+      context: .
+      dockerfile: Dockerfile.debian
+    image: app_todo_debian
+    container_name: app_todo_debian
+    restart: always
+    command: >
+      sh -c "npx prisma db push && npm run start"
+    env_file:
+      - .env
+    depends_on:
+      - db_todo
+    networks:
+      - npm_networks
 
-  # app_todo_ubuntu:
-  #   build:
-  #     context: .
-  #     dockerfile: Dockerfile.ubuntu
-  #   container_name: app_todo_ubuntu
-  #   restart: always
-  #   command: >
-  #     sh -c "npx prisma db push && npm run start"
-  #   env_file:
-  #     - .env
-  #   depends_on:
-  #     - db_todo
-  #   networks:
-  #     - npm_networks
+  app_todo_alpine:
+    build:
+      context: .
+      dockerfile: Dockerfile.alpine
+    image: app_todo_alpine
+    container_name: app_todo_alpine
+    restart: always
+    command: >
+      sh -c "npx prisma db push && npm run start"
+    env_file:
+      - .env
+    depends_on:
+      - db_todo
+    networks:
+      - npm_networks
+
+  app_todo_ubuntu:
+    build:
+      context: .
+      dockerfile: Dockerfile.ubuntu
+    image: app_todo_ubuntu
+    container_name: app_todo_ubuntu
+    restart: always
+    command: >
+      sh -c "npx prisma db push && npm run start"
+    env_file:
+      - .env
+    depends_on:
+      - db_todo
+    networks:
+      - npm_networks
 
   db_todo:
     image: postgres:13-alpine
@@ -61,4 +80,4 @@ volumes:
 
 networks:
   npm_networks:
-    external: true
+    # external: true
