@@ -21,7 +21,7 @@ RUN npx prisma generate
 COPY . .
 
 # Tahap Runtime
-FROM node:20-alpine AS production-stage
+FROM node:22.14.0-alpine AS production-stage
 
 # Set working directory
 WORKDIR /app
