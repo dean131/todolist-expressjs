@@ -4,6 +4,8 @@ services:
       context: .
       dockerfile: Dockerfile
     image: app_todo
+    ports:
+      - 3003:3000
     container_name: app_todo
     restart: always
     command: >
